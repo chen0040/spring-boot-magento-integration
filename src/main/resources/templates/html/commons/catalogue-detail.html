@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<div class="container container-lg">
+    <div class="panel panel-primary panel-page-header">
+        <div class="panel-body">
+            <div class="content">
+
+                <table class="table">
+                    <tr>
+                        <td>
+
+                            <h2><span th:text="#{site.product.details}"></span></h2>
+                            <span th:text="#{site.back.to}">Back to</span> <a href="#/catalogue-manage"><span th:text="#{site.list.of.sga.catalogues}">Categories</span></a>
+                            <br />
+
+                            <button class="btn btn-xs btn-danger" ng-click="deleteProduct()">Delete This Product</button>
+                            <br />
+
+                            <button class="btn btn-primary btn-sm" ng-click="editProduct()">Edit</button>
+
+                            <form id="upload-product-image" class="upload-form">
+                                <p class="font-sm"><i><span>Upload new image below</span></i></p>
+                                <input class="form-control" type = "file" product-image-upload ng-model = "productImage"/>
+                            </form>
+                            <a class="btn btn-secondary" ng-click="uploadProductImage()">
+                                <span>Upload Product Image</span>
+                            </a>
+
+                            <form id="upload-product-model" class="upload-form">
+                                <p class="font-sm"><i><span>Upload new 3D model (Android) below</span></i></p>
+                                <input class="form-control" type = "file" product-model-upload ng-model = "productModel"/>
+                            </form>
+                            <a class="btn btn-secondary" ng-click="uploadProductModel()">
+                                <span>Upload Product 3D Model (Android)</span>
+                            </a>
+
+                            <form id="upload-product-model-2" class="upload-form">
+                                <p class="font-sm"><i><span>Upload new 3D model (iOS) below</span></i></p>
+                                <input class="form-control" type = "file" product-model2-upload ng-model = "productModel2"/>
+                            </form>
+                            <a class="btn btn-secondary" ng-click="uploadProductModel2()">
+                                <span>Upload Product 3D Model (iOS)</span>
+                            </a>
+                        </td>
+                        <td>
+
+                            <a ng-href="product-3d/{{product.sku}}">3D Model Download (android)</a>
+                            <br />
+
+                            <a ng-href="product-3d-model-2/{{product.sku}}">3D Model Download (iOS)</a>
+                            <br />
+
+                            <img ng-src="{{product.imageUrl}}" height="300px" />
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-primary panel-widget">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <img src="img/job.png" /> <span>Product Details</span>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="content">
+
+                <table class="table table-hover table-stripped" style="width:100%">
+
+
+                    <tr><td>Name: </td><td>{{product.name}}</td></tr>
+                    <tr><td>Created: </td><td>{{product.created_at}}</td></tr>
+                    <tr><td>Updated: </td><td>{{product.updated_at}}</td></tr>
+                    <tr><td>Price: </td><td>{{product.price}}</td></tr>
+                    <tr><td>Type ID: </td><td>{{product.type_id}}</td></tr>
+                    <tr><td>Weight: </td><td>{{product.weight}}</td></tr>
+
+
+
+                    <tr><td>Visibility: </td><td>{{product.visibility}}</td></tr>
+                    <tr><td>Attribute Set ID: </td><td>{{product.attribute_set_id}}</td></tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <p>Custom Attributes: </p>
+                            <table class="table table-hover table-stripped">
+                                <tr ng-repeat="attr in product.custom_attributes">
+                                    <td>{{attr.attribute_code}}</td>
+                                    <td>{{attr.value}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <p>Extension Attributes: </p>
+                            <table class="table table-hover table-stripped">
+                                <tr ng-repeat="attr in product.extension_attributes">
+                                    <td>{{attr.attribute_code}}</td>
+                                    <td>{{attr.value}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

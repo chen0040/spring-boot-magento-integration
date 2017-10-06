@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<div class="container container-lg">
+    <div class="panel panel-primary panel-page-header">
+        <div class="panel-body">
+            <div class="content">
+                <!--<h2>{{employee.valid ? "Edit" : "Create"}} Employee</h2>-->
+
+                <span th:text="#{site.back.to}">Back to</span> <a href="#/catalogue-manage"><span th:text="#{site.list.of.sga.catalogues}">Categories</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-primary panel-widget">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+
+                <span ng-show="categoryId == -1" th:text="#{site.product.details}">Product Details</span>
+                <span ng-show="categoryId != -1">New Product under Category {{categoryTitle}}</span>
+            </h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="content">
+                <table class="table table-hover table-striped">
+                    <tr><td><span>SKU</span></td><td><input class="form-control" type="text" ng-model="product.sku" /></td></tr>
+                    <tr><td><span>Name</span></td><td><input class="form-control" type="text" ng-model="product.name" /></td></tr>
+                    <tr><td><span>Price</span></td><td><input class="form-control" type="text" ng-model="product.price" /></td></tr>
+                    <tr><td><span>Weight</span></td><td><input class="form-control" type="text" ng-model="product.weight" /></td></tr>
+                    <tr><td><span>Type</span></td><td><input class="form-control" type="text" ng-model="product.type_id" /></td></tr>
+                </table>
+
+                <hr />
+                <button class="btn btn-success" ng-click="updateProduct()"><span th:text="#{site.save}">Save</span></button>
+                <button class="btn btn-success" ng-click="cancel()"><span th:text="#{site.cancel}">Cancel</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
+
+

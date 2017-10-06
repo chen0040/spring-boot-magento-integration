@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<div ng-show="pageLoading" class="loading">Loading&#8230;</div>
+
+<div class="container container-lg" ng-if="user.enabled">
+    <div class="panel panel-primary panel-page-header">
+        <div class="panel-body">
+                <h2 style="width:100%" ng-show="tag && tag != 'all'">
+                    <span>{{categoryTitle}}</span>
+                    <button class="btn btn-primary btn-xs pull-right" ng-click="goBack()">Back</button>
+                    <button class="btn btn-primary btn-xs pull-right" ng-click="newProduct()">Add New Product</button>
+                </h2>
+
+
+                <table class="table" style="width:100%">
+                    <tr>
+                        <td ng-repeat="c in categories track by $index" style="text-align:center">
+                            <a ng-href="#/catalogue-manage/{{c.id}}">
+                                {{c.name}} <br />
+                                <span class="badge">
+                                    <img ng-src="/magento/categories/{{c.id}}/icon" />
+                                </span>
+                                <br />
+                                <span class="badge">{{c.product_count}}</span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+        </div>
+    </div>
+</div>
+
+<div class="container container-lg" ng-if="user.enabled">
+    <div class="panel panel-primary panel-widget">
+        <div class="panel-heading">
+            Products in {{categoryTitle}}
+        </div>
+
+        <div class="panel-body">
+
+
+                <div>
+                    <div>
+                        <button class="btn-primary btn-sm" ng-click="pager.firstPage()">First</button>
+                        <button class="btn-primary btn-sm" ng-click="pager.prevPage()">Prev</button>
+                        Page: {{pager.pageIndex+1}} / {{pager.pageCount}} (Total: {{pager.data.length}})
+                        <button class="btn-primary btn-sm" ng-click="pager.nextPage()">Next</button>
+                        <button class="btn-primary btn-sm" ng-click="pager.lastPage()">Last</button>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="col-md-4" ng-repeat="p in pager.content track by $index">
+                            <div class="panel panel-primary panel-widget">
+
+
+                                <div class="panel-body">
+
+                                    <table class="table" style="width:100%">
+                                        <tr><td colspan="2" align="center"><a ng-href="#/catalogue-detail/{{p.sku}}" style="color:#797a7a">{{p.name}}</a></td></tr>
+                                        <tr>
+                                            <td colspan="2" align="center">
+                                            <img ng-show="p.imageUrl==''" src="/img/page-loading.gif" height="250px" />
+
+                                            <a ng-show="p.imageUrl!=''" ng-href="#/catalogue-detail/{{p.sku}}">
+                                                <img ng-src="{{p.imageUrl}}" height="250px" width="250px" />
+                                            </a>
+
+                                            <br />
+                                            <a ng-href="product-3d/{{p.sku}}">3D Model Download (Android)</a>
+                                            <br />
+                                            <a ng-href="product-3d/{{p.sku}}">3D Model Download (iOS)</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/img/ico3.png" />: {{p.price | currency}}</td>
+                                            <td><img src="/img/ico6.png" />: {{p.type_id}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="panel-footer">
+                                    <img src="/img/ico4.png" />: {{p.updated_at}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+</div>
+
+</html>
